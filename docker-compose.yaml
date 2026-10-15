@@ -30,3 +30,14 @@ services:
     ports:
       - "9090:9090"
 
+  alert-forwarder:
+    build: ./alert-forwarder
+    container_name: alert-forwarder
+    environment:
+      - PORT=4319
+      - WEBHOOK_URL=http://host.docker.internal:5252/notification/OpenTelemetry
+    ports:
+      - "4319:4319"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
